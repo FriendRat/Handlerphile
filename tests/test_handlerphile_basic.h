@@ -86,6 +86,9 @@ TEST_CASE("Test exceptions", "[exceptions]") {
 					}
 				)
 			};
+			REQUIRE(true);
+		} catch (std::exception& e){
+			REQUIRE(false);
 		}
 	}
 

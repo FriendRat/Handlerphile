@@ -42,7 +42,7 @@ namespace Contextual{;
 	private:
 		IData _data;
 		bool verbose;
-		std::string filename;
+		const std::string filename;
 
 		void enter() override {
   			if (!resources->file.is_open()) {
@@ -67,7 +67,7 @@ namespace Contextual{;
 		}
 
 	public:
-		FileHandler(std::string filename, std::ios::openmode mode = std::ios::in | std::ios::out,
+		FileHandler(const std::string filename, std::ios::openmode mode = std::ios::in | std::ios::out,
 										  bool verbose=false) :
 												IResource<IData>(_data),
 												_data(IData{std::fstream(filename, mode)}),

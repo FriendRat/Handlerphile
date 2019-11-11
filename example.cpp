@@ -1,49 +1,31 @@
-#include <contextual.h>
-#include <algorithm>
-#define eval [&](auto resource)
+#include <handlerphile.h>
+#include <stdio.h>
 
-struct Data {
-	std::string username;
-	std::string password;
-	bool logged_in = false;
-};
-
-//typedef Context BaseContext<Data>;
-
-class Resource : public BaseResource {
-private:
-	std::string _password = "xxxxxxxxx";
-
-	void enter() override {
-		std::swap(_password, resources->password);
-	}
-
-	void exit(std::optional<std::exception> e) override {
-		std::swap(_password, resources->password);
-		resources->logged_in = true;
-
-	}
-public:
-
-	Resource(Data &resources): BaseResource::BaseResource(&resources){};
-};
-
+using namespace Contextual;
 
 int main(){
-	Data first_user{"admin", "password123"};
-	std::cout << "Logged in: " << first_user.logged_in << "\n\n";
-	With {
-		Resource(first_user) + Context {
-			eval {
-				std::cout << "Username: " << resource->username << "\n";
-				std::cout << "Password: " << resource->password << "\n";
-				resource->logged_in = true;
+	
+	const std::string filename = "new_file.txt";
+
+	with {
+		FileHandler(filename, std::fstream::out)(
+			[](auto filehandler) {
+				filehandler->file << "This is a new file.";
 			}
-		}
+		)
 	};
 
+	std::string file_contents;
 
-	std::cout << "Username: " << first_user.username << "\n";
-	std::cout << "Password: " << first_user.password << "\n";
-	std::cout << "Logged in: " << first_user.logged_in << "\n";
+	with {
+		FileHandler(filename)(
+			[&](auto filehandler){
+				file_contents = filehandler->read();
+			}
+		)
+	}; 
+
+	std::cout << file_contents << std::endl;
+
+	remove(filename.c_str());
 }
