@@ -40,6 +40,8 @@ The file is manipulated through the `file` attribute. The `length` method return
 
 The verbose boolean parameter toggles extra logging on and off. 
 
+An example file has been include and can be compiled via `$ make example`.
+
 ## Exception handling
 
 FileHandler suppress almost all exceptions and instead issues a warning to `std::cerr`. However, there are two important exceptions. If the file with filename specified cannot be opened for any reason, an exception is thrown. Similarly, FileHandler attempts to close the file stream after the code block has been executed. If it is unable to do this for any reason, an exception is thrown.
