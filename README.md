@@ -2,12 +2,12 @@
 
 ## A file handler for C++
 
-Handlerphile is a header only library that uses the {r}[Contextual](https://github.com/FriendRat/contextual) context manager to provide a python-like file handler that simplifies the standard mechanisms for safe file management in C++.
+Handlerphile is a header only library that uses the [Contextual](https://github.com/FriendRat/contextual) context manager to provide a python-like file handler that simplifies the standard mechanisms for safe file management in C++.
 
 ## Requirements
 This library requires C++17 or greater. It was built and tested on Linux using g++; compatibility with other operating systems and compilers has not been confirmed.
 
-This library also requires the C++ library {r}[Contextual](https://github.com/FriendRat/contextual).
+This library also requires the C++ library [Contextual](https://github.com/FriendRat/contextual).
 
 ## How to use it
 
